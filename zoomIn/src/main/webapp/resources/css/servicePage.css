@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+
+table {
+	border-collapse:collapse;
+	margin-bottom: 10px;
+}
+th, td {
+	padding: 3px 10px;
+}
+.off-screen {
+	display: none;
+}
+#current_page {
+	width: 500px;
+	text-align: center;
+}
+#current_page a {
+	display: inline-block;
+	padding: 3px 5px;
+	margin-right: 10px;
+	font-family:Tahoma;
+	text-decoration: none;
+}
+#current_page a.active {
+	font-weight: bold;
+}

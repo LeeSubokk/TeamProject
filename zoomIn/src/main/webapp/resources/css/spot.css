@@ -1,0 +1,214 @@
+@charset "UTF-8";
+
+:root {
+  --blue: #4e73df;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #e74a3b;
+  --orange: #fd7e14;
+  --yellow: #f6c23e;
+  --green: #1cc88a;
+  --teal: #20c9a6;
+  --cyan: #36b9cc;
+  --white: #fff;
+  --gray: #858796;
+  --gray-dark: #5a5c69;
+  --primary: #4e73df;
+  --secondary: #858796;
+  --success: #1cc88a;
+  --info: #36b9cc;
+  --warning: #f6c23e;
+  --danger: #e74a3b;
+  --light: #f8f9fc;
+  --dark: #5a5c69;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --place-color-ad-bg: 255,255,255
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+
+.spot{
+	background-color:transparent;
+	text-align:left;
+	display:table;
+	padding-right:3.5%;
+}
+.spot-scroll{
+	max-height: 65vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.spot-content ::-webkit-scrollbar{
+	width:0.8rem;
+}
+.spot-content ::-webkit-scrollbar-track{
+	background-color:transparent;
+ }
+.spot-content ::-webkit-scrollbar-thumb{
+	background-color:#dddddf;
+	border-radius:3px;
+}
+.place-list {
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:center;
+}
+.container > .place-list{
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+.place-list > div{
+	min-width:32.5%;
+	display:contents;
+	
+}
+.spot-list{
+	background-color:white;
+	padding:1rem;
+	margin-inline: 1px;
+	margin:5px;
+	margin-bottom:1rem;
+	line-height:165%;
+	text-align:left;
+}
+
+.spot-list::marker{
+	color:transparent;
+}
+.spot-img img{
+	width:99.3px;
+	height:99px;
+	flex-direction:column;
+	margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.inner-container{
+	width:100%;
+	height:100%;
+	display:flex;
+	flex-direction:column;
+	align-items:center;
+	background: white;
+	padding-top:15px;
+	overflow-y:auto;
+}
+
+.inner-text-area{
+	display:inline-block;
+	vertical-align:middle;
+	min-width:56%;
+	text-align:left;
+	margin-top:1rem;
+	justify-items:center;
+	position:relative;
+}
+
+a:hover{
+	text-decoration:none;
+}
+
+.a-nothover:hover{
+	color:#707070;
+}
+.a-nothover{
+	color:gray;
+}
+.keyword{
+	margin-top: 4px;
+    white-space: nowrap;
+    position: relative;
+    margin-inline: 0.5px;
+}
+.keyword:before{
+	
+	background-color: rgb(142 188 255 / 22%);
+	background: rgba(var(-place-color-ad-bg), 0.1);
+	position: absolute;
+    right: -2px;
+    bottom: 0;
+    left: -2px;
+    height: 11px;
+    content: "";
+    z-index:150;
+    
+}
+
+.reply a{
+	visibility: hidden;
+}
+
+.reply:hover a{
+	visibility:visible;
+	content-visibility: visible;
+}
+.place_map{
+	margin: 10px;
+    padding: 0px;
+}
+
+.col input[type="checkbox"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}
+
+.col input[type="checkbox"]+label {
+	display: inline-block;
+	position: relative;
+	padding-left: 24px;
+	cursor: pointer;
+}
+
+.col input[type="checkbox"]+label:before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 3px;
+	width: 18px;
+	height: 18px;
+	text-align: center;
+	background: #fff;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+} /* 보여질 부분의 스타일을 추가하면 된다. */
+.col input[type="checkbox"]:checked+label:after {
+	content: '';
+	position: absolute;
+	top: 3px;
+	left: 0;
+	width: 18px;
+	height: 18px;
+	background-color: #b8c9dc;
+}
+
+.divider{
+    width: 0;
+    border-right: 1px solid #e3e6f0;
+    height: calc(4.375rem - 2rem);
+    margin: auto 1rem;
+}
+
+.arrange{
+    margin-bottom:10px;
+    font-size: 20px;
+}
+

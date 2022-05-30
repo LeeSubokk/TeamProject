@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.web.zoomIn.Mapper">
+
+	<!-- ////////////////////////////// 유저///////////////////////////////////////////////// -->
+	<select id='userContent' resultType="user"
+		parameterType="String">
+		select *
+		from user where user_id=#{user_id}
+	</select>
+	<!-- -->
+	<select id='userLogin' resultType="user" parameterType="String">
+		select *
+		from user where user_id=#{user_id}
+	</select>
+	<!-- -->
+	<select id='userList' resultType="user">
+		select * from user
+	</select>
+	<!-- -->
+	<insert id="insertUser" parameterType="user">
+		insert into user
+		values(#{user_id},#{user_password},#{user_name},#{user_birthday},#{user_gender},#{user_phone},
+		#{user_email},#{user_postcode},#{user_roadAddress},#{user_detailAddress},#{user_extraAddress},#{user_grade});
+	</insert>
+	<!-- -->
+	<update id="updateUser" parameterType="user">
+		update user set
+		user_name=#{user_name}, user_birthday=#{user_birthday},
+		user_gender=#{user_gender}, user_phone=#{user_phone},
+		user_email=#{user_email}, user_postcode=#{user_postcode},
+		user_roadAddress=#{user_roadAddress},
+		user_detailAddress=#{user_detailAddress},
+		user_extraAddress=#{user_extraAddress}
+		where user_id=#{user_id}
+	</update>
+
+	<!-- -->
+	<update id="updateUserincludePassword" parameterType="user">
+		update user
+		set
+		user_name=#{user_name}, user_password=#{user_password},
+		user_birthday=#{user_birthday},
+		user_gender=#{user_gender},
+		user_phone=#{user_phone},
+		user_email=#{user_email},
+		user_postcode=#{user_postcode},
+		user_roadAddress=#{user_roadAddress},
+		user_detailAddress=#{user_detailAddress},
+		user_extraAddress=#{user_extraAddress}
+		where user_id=#{user_id}
+	</update>
+	<!-- 유저 아이디 찾기 -->
+	<select id='findUserId' resultType="String" parameterType="user">
+		select user_id
+		from user where user_name=#{user_name} and user_email =
+		#{user_email}
+	</select>
+
+	<!--유저 중복 아이디확인 -->
+	<select id='userIdCheck' resultType="int" parameterType="String">
+		select
+		COUNT(user_id)
+		from user where user_id=#{user_id}
+	</select>
+
+	<!-- ////////////////////////////// 플레이스 ///////////////////////////////////////////////// -->
+
+	<!-- 플레이스 리스트 -->
+	<select id='placeList' resultType="place">
+		select * from place
+	</select>
+
+	<select id='placeListGradeDesc' resultType="place">
+		select * from place order by place_grade_avg desc
+	</select>
+
+	<select id='placeListReplyDesc' resultType="place">
+		select * from place order by place_reply_count desc
+	</select>
+
+	<select id='placeListViewDesc' resultType="place">
+		select * from place order by place_view desc
+	</select>
+
+	<!-- 플레이스 작성 -->
+
+	<insert id="placeInsert" parameterType="place">
+		insert into
+		place(place_name,place_address,place_tell,place_business_hours,
+		category_name,place_description)
+		values(#{place_name},#{place_address},#{place_tell},
+		#{place_business_hours}, #{category_name}, #{place_description})
+	</insert>
+
+	<!-- 플레이스 수정 -->
+	<update id="placeUpdate" parameterType="place">
+		update place set
+		place_name = #{place_name},
+		place_address = #{place_address},
+		place_tell = #{place_tell},
+		place_business_hours =
+		#{place_business_hours},
+		category_name = #{category_name},
+		place_view =
+		#{place_view},
+		place_grade_avg = #{place_grade_avg},
+		place_reply_count =
+		#{place_reply_count},
+		place_description = #{place_description}
+
+		where
+		place_code = #{place_code}
+
+	</update>
+
+	<!-- 플레이스 삭제 -->
+
+	<delete id="placeDelete" parameterType="int">
+		delete
+		from place
+		where
+		place_code = #{place_code}
+	</delete>
+
+	<!-- 플레이스 상세정보 -->
+	<select id='placeContent' resultType="place" parameterType="int">
+		select * from place where place_code=#{place_code}
+	</select>
+
+	<!-- 플레이스 조회수 -->
+	<update id="placeViewUp" parameterType="int">
+		update place set
+		place_view = place_view + 1
+		where place_code = #{place_code}
+	</update>
+
+	<select id='getPlaceGradeAvg' resultType="double"
+		parameterType="int">
+		select avg(reply_grade)
+		from place_reply
+		where place_code=
+		#{place_code}
+	</select>
+
+	<!-- 플레이스 평점 넣기 -->
+	<update id="placeGradeAvg" parameterType="place">
+		update place set
+		place_grade_avg = #{place_grade_avg}
+		where place_code = #{place_code}
+	</update>
+
+	<!-- 플레이스 댓글 개수 넣기 -->
+	<update id="placeReplyCntUp" parameterType="int">
+		update place set
+		place_reply_count = place_reply_count + 1
+		where place_code =
+		#{place_code}
+	</update>
+	<update id="placeReplyCntDown" parameterType="int">
+		update place set
+		place_reply_count = place_reply_count - 1
+		where place_code =
+		#{place_code}
+	</update>
+
+
+	<!-- 댓글 조회 -->
+	<select id="placeReplyList" parameterType="int"
+		resultType="placeReply">
+		select*
+		from place_reply
+		where place_code = #{place_code}
+		order by
+		place_code desc
+
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="placeReplyInsert" parameterType="placeReply">
+		insert into
+		place_reply(place_code, user_id, reply_content, reply_grade)
+		value(#{place_code},#{user_id}, #{reply_content}, #{reply_grade})
+	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="placeReplyUpdate" parameterType="placeReply">
+		update place_reply
+		set
+		user_id = #{user_id},
+		reply_content = #{reply_content},
+		reply_grade =
+		#{reply_grade}
+		where reply_code = #{reply_code}
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="placeReplyDelete" parameterType="int">
+		delete from
+		place_reply
+		where reply_code = #{reply_code}
+	</delete>
+
+	<!-- 댓글 갯수 -->
+	<select id='placeReplyCount' resultType="int"
+		parameterType="int">
+		select
+		COUNT(reply_code)
+		from place_reply where
+		place_code=#{place_code}
+	</select>
+
+	<!-- 댓글 전체 삭제 -->
+	<delete id="placeReplyAllDelete" parameterType="int">
+		delete from
+		place_reply
+		where place_code = ${place_code}
+	</delete>
+
+	<!-- 키워드 전체 가져오기 -->
+	<select id='placeKeywordSelectAll' resultType="placeKeyword">
+		select
+		place_keyword_code , place_code , keyword_content from place_keyword
+	</select>
+
+	<!-- 키워드 가져오기 -->
+	<select id='placeKeywordSelect' resultType="placeKeyword"
+		parameterType="int">
+		select place_keyword_code , place_code , keyword_content
+		from place_keyword where place_code=#{place_code}
+	</select>
+
+	<!-- 키워드 작성 -->
+	<insert id="placeKeywordInsert" parameterType="placeKeyword">
+		insert into
+		place_keyword(place_code, keyword_content)
+		value(#{place_code},#{keyword_content})
+	</insert>
+
+	<!-- 키워드 수정 -->
+	<update id="placeKeywordUpdate" parameterType="placeKeyword">
+		update
+		place_keyword
+		set
+		keyword_content = #{keyword_content},
+		where
+		place_keyword_code = #{place_keyword_code}
+	</update>
+
+	<!-- 키워드 삭제 -->
+	<delete id="placeKeywordDelete" parameterType="int">
+		delete from
+		place_keyword
+		where place_keyword_code = #{place_keyword_code}
+	</delete>
+
+	<!-- 키워드 전체 삭제 -->
+	<delete id="placeKeywordAllDelete" parameterType="int">
+		delete from
+		place_keyword
+		where place_code = ${place_code}
+	</delete>
+
+
+	<!-- ////////////////////////////// 고객 센터 게시판 ///////////////////////////////////////////////// -->
+
+	<!-- 고객센터 글 리스트 -->
+	<select id="boardList" resultType="board">
+		select * from board order by
+		board_code desc
+	</select>
+
+	<!-- 고객센터 글 작성 -->
+	<insert id="boardInsert" parameterType="board">
+		insert into board
+		values(#{board_code},#{user_id},#{board_title},#{board_content},
+		DATE_FORMAT(now(),'%Y-%m-%d') ,#{board_view},
+		#{board_file},#{board_rearFile},#{board_reply_count});
+	</insert>
+
+	<!-- 게시글 상세정보 -->
+	<select id="boardView" parameterType="int" resultType="board">
+		select *
+		from board
+		where board_code = #{board_code}
+	</select>
+
+
+	<!-- 게시글 수정 -->
+	<update id="boardUpdate" parameterType="board">
+		update board set
+		board_title = #{board_title},
+		board_content = #{board_content},
+		board_date = now()
+
+		where board_code = #{board_code}
+
+	</update>
+
+	<!-- 게시글 삭제 -->
+	<delete id="boardDelete" parameterType="int">
+		delete
+		from board
+		where
+		board_code = #{board_code}
+	</delete>
+
+	<!-- 게시글 조회수 -->
+	<update id="boardViewUp" parameterType="int">
+		update board set
+		board_view = board_view + 1
+		where board_code = #{board_code}
+	</update>
+
+	<!-- 게시판 댓글 개수 넣기 -->
+	<update id="boardReplyCntUp" parameterType="int">
+		update board set
+		board_reply_count = board_reply_count + 1
+		where board_code =
+		#{board_code}
+	</update>
+	<update id="boardReplyCntDown" parameterType="int">
+		update board set
+		board_reply_count = board_reply_count - 1
+		where board_code =
+		#{board_code}
+	</update>
+
+	<!-- 고객센터 게시판 댓글 -->
+
+	<!-- 댓글 조회 -->
+	<select id="boardReplyList" parameterType="int"
+		resultType="boardReply">
+		select
+		reply_code, board_code, user_id, reply_content,
+		reply_date
+		from board_reply
+		where board_code = #{board_code}
+	</select>
+
+	<!-- 댓글 작성 -->
+	<insert id="boardReplyInsert" parameterType="boardReply">
+		insert into
+		board_reply(board_code, user_id, reply_content)
+		value(#{board_code},
+		#{user_id}, #{reply_content});
+	</insert>
+
+	<!-- 댓글 수정 -->
+	<update id="boardReplyUpdate" parameterType="boardReply">
+		update board_reply
+		set
+		user_id = #{user_id},
+		reply_content = #{reply_content}
+
+		where
+		reply_code = #{reply_code}
+
+	</update>
+
+	<!-- 댓글 삭제 -->
+	<delete id="boardReplyDelete" parameterType="boardReply">
+		delete from
+		board_reply
+		where reply_code = #{reply_code}
+
+	</delete>
+
+	<!-- 댓글 전체 삭제 -->
+	<delete id="boardReplyAllDelete" parameterType="int">
+		delete from
+		board_reply
+		where board_code = ${board_code}
+	</delete>
+
+	<!-- 댓글 갯수 -->
+	<select id='boardReplyCount' resultType="int"
+		parameterType="int">
+		select
+		COUNT(user_id)
+		from board_reply where
+		board_code=#{board_code}
+	</select>
+
+</mapper>
+
+
+

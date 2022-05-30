@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="user" type="com.web.zoomIn.bean.UserBean" />
+		<typeAlias alias="place" type="com.web.zoomIn.bean.PlaceBean" />
+		<typeAlias alias="board" type="com.web.zoomIn.bean.BoardBean" />
+		<typeAlias alias="boardReply" type="com.web.zoomIn.bean.BoardReplyBean" />
+		<typeAlias alias="placeReply" type="com.web.zoomIn.bean.PlaceReplyBean" />
+		<typeAlias alias="placeKeyword" type="com.web.zoomIn.bean.PlaceKeywordBean" />
+	</typeAliases>
+
+</configuration>

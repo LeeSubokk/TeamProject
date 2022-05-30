@@ -1,0 +1,102 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.section input[id*="slide"] {
+	display: none;
+}
+
+.section .slidewrap {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.section .slidelist {
+	white-space: nowrap;
+	font-size: 0;
+	overflow: hidden;
+	position: relative;
+}
+
+.section .slidelist>li {
+	display: inline-block;
+	vertical-align: middle;
+	width: 100%;
+	transition: all .35s;
+}
+
+.section .slidelist>li>a {
+	display: block;
+	position: relative;
+}
+
+.section .slidelist>li>a img {
+	max-width: 100%;
+}
+
+.section .slidelist label {
+	position: absolute;
+	z-index: 10;
+	top: 50%;
+	transform: translateY(-50%);
+	padding: 20px;
+	cursor: pointer;
+}
+
+/* input에 체크되면 슬라이드 효과 */
+.section input[id="slide01"]:checked ~ .slidewrap .slidelist>li {
+	transform: translateX(0%);
+}
+
+.section input[id="slide02"]:checked ~ .slidewrap .slidelist>li {
+	transform: translateX(-100%);
+}
+
+.section input[id="slide03"]:checked ~ .slidewrap .slidelist>li {
+	transform: translateX(-200%);
+}
+
+.section input[id="slide04"]:checked ~ .slidewrap .slidelist>li {
+	transform: translateX(-300%);
+}
+
+/* 좌,우 슬라이드 버튼 */
+.slide-control>div {
+	display: none;
+}
+
+.section .left {
+	left: 30px;
+	background: url('../../img/left.png') center center/100% no-repeat;
+	background-color: #00000040;
+	left: 220px;
+}
+
+.section .right {
+	right: 30px;
+	background: url('../../img/right.png') center center/100% no-repeat;
+	background-color: #00000040;
+	right: 220px;
+}
+
+.section input[id="slide01"]:checked ~ .slidewrap .slide-control>div:nth-child(1)
+	{
+	display: block;
+}
+
+.section input[id="slide02"]:checked ~ .slidewrap .slide-control>div:nth-child(2)
+	{
+	display: block;
+}
+
+.section input[id="slide03"]:checked ~ .slidewrap .slide-control>div:nth-child(3)
+	{
+	display: block;
+}
+
+.section input[id="slide04"]:checked ~ .slidewrap .slide-control>div:nth-child(4)
+	{
+	display: block;
+}
