@@ -95,6 +95,7 @@
 				<div class="place_map">
 					<i class="fas fa-map-marker-alt"></i>${place.place_address}
 					<div id="map" style="width: 100%; height: 350px;"></div>
+					<div id="bus"></div>
 				</div>
 
 				<i class="fas fa-star text-yellow-200"></i>별점 <b>${place.place_grade_avg}</b>/<sub>5</sub> <i class="fas fa-book text-grayblue-100"></i>리뷰<b>${place.place_reply_count}</b>개
@@ -110,7 +111,6 @@
 				<div class="review_preview">
 					<div class="r">
 						<select id="review_align" name="review_align" class="mt-sm-2">
-							<option value="reviewCnt">리뷰 많은순</option>
 							<option value="upperscore">높은 별점순</option>
 							<option value="lowerscore">낮은 별점순</option>
 						</select>
