@@ -20,12 +20,12 @@
 
 		<!--  메뉴시작 Home -->
 		<li class="nav-item no-arrow"><a class="nav-link" href="main?menu=main-content" id="menu-content">
-				<span class="mr-2 d-none d-lg-inline text-gray-600 small">HOME2</span>
+				<span class="mr-2 d-none d-lg-inline text-gray-600 small">HOME</span>
 			</a></li>
 		<div class="topbar-divider d-none d-sm-block"></div>
 		<!--  메뉴 소개 -->
 		<li class="nav-item no-arrow"><a class="nav-link" href="main?menu=introduce" id="menu-introduce" method="post">
-				<span class="mr-2 d-none d-lg-inline text-gray-600 small">소개2</span>
+				<span class="mr-2 d-none d-lg-inline text-gray-600 small">소개</span>
 			</a></li>
 		<div class="topbar-divider d-none d-sm-block"></div>
 		<!-- 메뉴  추천경로 -->

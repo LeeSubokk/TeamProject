@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 
 <script src="resources/js/spotDetail.js"></script>
+<script src="resources/js/bus.js"></script>
 <c:set var="ctp" value="${pageContext.request.contextPath}" />
 <link href="resources/css/spotGrade.css" rel="stylesheet">
 <link href="resources/css/animation/textAni.css" rel="stylesheet">
@@ -95,7 +96,7 @@
 				<div class="place_map">
 					<i class="fas fa-map-marker-alt"></i>${place.place_address}
 					<div id="map" style="width: 100%; height: 350px;"></div>
-					<div id="bus"></div>
+					<div id="bus">버스정류장<%request.getParameter("LINE_NAME"); %></div>
 				</div>
 
 				<i class="fas fa-star text-yellow-200"></i>별점 <b>${place.place_grade_avg}</b>/<sub>5</sub> <i class="fas fa-book text-grayblue-100"></i>리뷰<b>${place.place_reply_count}</b>개
@@ -186,7 +187,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			showMap('${place.place_address}', '${place.place_name}');
-			
+			setBus('${place.place_address}');
 			let length = ${fn:length(placeReplyList)};
 			if	(length > 5){
 				for(var i = 4; i<${fn:length(placeReplyList)}; i++){
